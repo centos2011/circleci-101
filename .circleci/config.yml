@@ -9,4 +9,5 @@ jobs:
           npm install -g create-react-app@1.5.2
           create-react-app sample-app
           cd sample-app
+          npm start
       
