@@ -2,64 +2,15 @@ version: 2
 jobs:
   build:
     working_directory: /app
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache \
-              py-pip=9.0.0-r1 gcc \
-              libffi-dev python-dev \
-              linux-headers \
-              musl-dev \
-              libressl-dev \
-              make
-            pip install \
-              docker-compose==1.12.0 \
-              awscli==1.11.76 \
-              ansible==2.4.2.0
-      - run:
-          name: Save Vault Password to File
-          command: echo $ANSIBLE_VAULT_PASS > .vault-pass.txt
-      - run:
-          name: Decrypt .env
-          command: |
-            ansible-vault decrypt .circleci/envs --vault-password-file .vault-pass.txt
-      - run:
-          name: Move .env
-          command: rm -f .env && mv .circleci/envs .env
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/app.tar
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/app.tar | true
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build --cache-from=app -t app .
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/app.tar app
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/app.tar
-      - deploy:
-          name: Push application Docker image
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              login="$(aws ecr get-login --region $ECR_REGION)"
-              ${login}
-              docker tag app "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
-              docker push "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
-            fi
+  stages:
+      deployment:
+        workDir: /home/ubuntu/myproject
+        steps:
+          - type: deploy
+              name: "Deploy to Heroku"
+            command: |
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+	        # Install Heroku fingerprint
+		echo 'heroku.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAu8erSx6jh+8ztsfHwkNeFr/SZaSOcvoa8AyMpaerGIPZDB2TKNgNkMSYTLYGDK2ivsqXopo2W7dpQRBIVF80q9mNXy5tbt1WE04gbOBB26Wn2hF4bk3Tu+BNMFbvMjPbkVlC2hcFuQJdH4T2i/dtauyTpJbD/6ExHR9XYVhdhdMs0JsjP/Q5FNoWh2ff9YbZVpDQSTPvusUp4liLjPfa/i0t+2LpNCeWy8Y+V9gUlDWiyYwrfMVI0UwNCZZKHs1Unpc11/4HLitQRtvuk0Ot5qwwBxbmtvCDKZvj1aFBid71/mYdGRPYZMIxq1zgP1acePC1zfTG/lvuQ7d0Pe0kaw==' >> ~/.ssh/known_hosts
+	        git push git@heroku.com:<heroku-app-name>.git
+              fi
