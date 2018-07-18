@@ -5,4 +5,7 @@ jobs:
       - image: circleci/node:8.11.3
     steps:
       - checkout
-      - run: sudo npm install -g create-react-app@1.5.2
+      - run: |
+          sudo npm install -g create-react-app@1.5.2
+          sudo apt-get update -y
+          sudo apt install ansible
