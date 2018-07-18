@@ -7,5 +7,6 @@ jobs:
       - checkout
       - run: |
           npm install -g create-react-app@1.5.2
-          echo $CIRCLE_JOB
+          create-react-app sample-app
+          cd sample-app
       
