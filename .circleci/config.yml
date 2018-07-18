@@ -6,10 +6,10 @@ jobs:
     steps:
       - checkout
       - run: |
+          apt-get update -y
+          apt-get install sudo ansible python-pip -y
           sudo npm install -g create-react-app@1.5.2
           sudo apt-get install software-properties-common
           sudo apt-add-repository ppa:ansible/ansible -y
-          sudo apt-get update -y
-          sudo apt-get install sudo ansible python-pip -y
           pip install boto --user
           pip install boto3 --user
