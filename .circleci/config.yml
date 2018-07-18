@@ -1,12 +1,8 @@
 version: 2
-machine:
-  node:
-    version: 8.11.1
-  npm:
-    version: 5.8.0
-dependencies:
-  override:
-    - npm install
-test:
-  override:
-    - echo "test"
+jobs:
+  build:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+      - image: circleci/ruby:2.4.1-jessie
+    steps:
+      - checkout
+      - run: echo "A first hello"
