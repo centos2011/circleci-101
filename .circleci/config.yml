@@ -1,15 +1,11 @@
 version: 2
 jobs:
   build:
-    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
-      - image: node:8.11.3
+    docker:
+      - image: docker:stable-git
     steps:
       - checkout
-      - run: |
-          apk add ansible
-          ansible --version
-          #npm install -g create-react-app@1.5.2
-          #create-react-app sample-app
-          #cd sample-app
-          #node --version
-      
+      - setup_remote_docker:
+          version: 17.05.0-ce
+      # build the image
+      - run: docker build -t $ECR_REPO:0.1 .
