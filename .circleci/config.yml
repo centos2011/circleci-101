@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
-      - image: circleci/node:8.11.3
+      - image: ubuntu:16.04
     steps:
       - checkout
       - run: |
