@@ -4,17 +4,13 @@ jobs:
     docker:
       - image: node:8.11.3
       #- image: ubuntu:16.04
-    #working_directory: /home/ubuntu
+    working_directory: /opt
     steps:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
-      - run: useradd ubuntu --create-home
-      - run: sudo su - ubuntu
-      - run: cd /home/ubuntu
       - run: pwd
-      - run: id
-      #- run:
+       #- run:
           #name: push build to s3
           #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
 
