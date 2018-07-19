@@ -4,6 +4,7 @@ jobs:
     docker:
       #- image: node:8.11.3
       - image: ubuntu:16.04
+    working_directory: /home/ubuntu
     steps:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
