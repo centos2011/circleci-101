@@ -1,5 +1,8 @@
 version: 2
 jobs:
   build:
+    working_dir: /
     docker:
       - image: circleci/node:8.11.3-stretch-browsers   # (1)
+  steps:
+    - checkout
