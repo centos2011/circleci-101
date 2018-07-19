@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build: pdax_web_staging
+  pdax_web_staging
     docker:
       - image: node:8.11.3
     steps:
@@ -16,15 +16,15 @@ jobs:
   #     - run: |
   #         echo "test"
 
-#workflows:
-#  version: 2
-#  pdax-web-deployement:
-#    jobs:
-#      - pdax_web_staging:
-#          filters:
-#            branches:
-#              only:
-#                - staging
+workflows:
+  version: 2
+  pdax-web-deployement:
+    jobs:
+      - pdax_web_staging:
+          filters:
+            branches:
+              only:
+                - staging
 #      - pdax_web_prod:
 #          filters:
 #            branches:
