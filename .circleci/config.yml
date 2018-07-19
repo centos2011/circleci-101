@@ -3,11 +3,11 @@ jobs:
   build:
     docker:
       - image: node:8.11.3
-     steps:
-       - checkout:
-       - run: |
-           echo "test"
-           
+    steps:
+      - checkout:
+      - run: |
+          echo "test"
+                      
   #pdax_web_prod:
   #  docker:
   #    - image: node:8.11.3
