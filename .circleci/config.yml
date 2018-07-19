@@ -4,9 +4,9 @@ jobs:
     docker:
       - image: node:8.11.3
     steps:
-      - checkout:
-      - run: |
-          echo "test"
+      - checkout
+      - run: echo "A first hello"
+
                       
   #pdax_web_prod:
   #  docker:
