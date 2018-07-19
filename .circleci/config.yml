@@ -9,7 +9,7 @@ jobs:
       - run: echo "Test!"
       #- run:
           #name: push build to s3
-          #  command: aws deploy push --application-name pdax-backend --s3-location s3://pdax-circleci/pdax-backend-ws-prod-$CIRCLE_SHA1.zip --ignore-hidden-files --region=ap-southeast-1 
+          #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
 
 workflows:
   version: 2
