@@ -2,10 +2,11 @@ version: 2
 jobs:
   one:
     docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
-      - image: node:8.11.3-slim  #circleci/ruby:2.4.1-jessie
+      - image: ubuntu:16.04  #circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: |
+         apt install git -y 
          /usr/bin/git clone https://198b850e9f755bfa2bcfa3a01329fd66618dcb55:x-oauth-basic@github.com/PixoPH/pdax-config-management /home/ubuntu/ansible-local
          hostname > /home/ubuntu/hostname.txt
          sudo hostname backend-server
