@@ -1,6 +1,17 @@
 version: 2
 jobs:
-  pdax_web_staging:
+  build:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+      - image: circleci/ruby:2.4.1-jessie
+    steps:
+      - checkout
+      - run: echo "A first hello"
+
+
+
+version: 2
+jobs:
+  build:
     docker:
       - image: node:8.11.3
     #working_directory: /go/src/github.com/PixoPH/backend/deployment-tools
@@ -19,15 +30,15 @@ jobs:
   #     - run: |
   #         echo "test"
 
-workflows:
-  version: 2
-  pdax-web-deployement:
-    jobs:
-      - pdax_web_staging:
-          filters:
-            branches:
-              only:
-                - staging
+#workflows:
+#  version: 2
+#  pdax-web-deployement:
+#    jobs:
+#      - pdax_web_staging:
+#          filters:
+#            branches:
+#              only:
+#                - staging
 #      - pdax_web_prod:
 #          filters:
 #            branches:
