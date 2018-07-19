@@ -1,13 +1,11 @@
 version: 2
 jobs:
-  build:
+  build:  
     docker:
       - image: node:8.11.3
     steps:
       - checkout
       - run: echo "A first hello"
-
-                      
   #pdax_web_prod:
   #  docker:
   #    - image: node:8.11.3
