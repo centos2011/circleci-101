@@ -5,7 +5,11 @@ jobs:
       - image: node:8.11.3
     steps:
       - checkout
+          path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
+      #- run:
+          #name: push build to s3
+          #  command: aws deploy push --application-name pdax-backend --s3-location s3://pdax-circleci/pdax-backend-ws-prod-$CIRCLE_SHA1.zip --ignore-hidden-files --region=ap-southeast-1 
 
 workflows:
   version: 2
