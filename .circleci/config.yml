@@ -5,7 +5,7 @@ jobs:
       - image: node:8.11.3
     steps:
       - checkout
-          path: /go/src/github.com/PixoPH/pixo-web
+          #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
       #- run:
           #name: push build to s3
