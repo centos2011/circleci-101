@@ -1,17 +1,17 @@
 version: 2
 jobs:
-  deploy_pdax_web_staging:
+  deploy_pdax_web_prod:
     docker:
       - image: node:8.11.3
     steps:
       - checkout
-      - run: echo "A first hello. Test!"
+      - run: echo "Test!"
 
 workflows:
   version: 2
   deploy-pdax-web:
     jobs:
-      - deploy_pdax_web_staging:
+      - deploy_pdax_web_prod:
           filters:
             branches:
               only:
