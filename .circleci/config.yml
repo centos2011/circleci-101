@@ -9,6 +9,8 @@ jobs:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
+      - run: |
+          apt update -y && apt install python-pip	sudo
       - run:
           name: Install awscli
             command: sudo pip install awscli
