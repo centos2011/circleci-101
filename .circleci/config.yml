@@ -11,4 +11,5 @@ workflows:
   version: 2
   deploy-pdax-web:
     jobs:
-      - deploy_pdax_web_staging
+      - deploy_pdax_web_staging:
+          filters
