@@ -3,7 +3,7 @@ jobs:
   pdax_web_staging:
     docker:
       - image: node:8.11.3
-    working_directory: /go/src/github.com/PixoPH/backend/deployment-tools
+    #working_directory: /go/src/github.com/PixoPH/backend/deployment-tools
      steps:
        - checkout:
            path: /go/src/github.com/PixoPH/pixo-web
