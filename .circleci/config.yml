@@ -5,7 +5,11 @@ jobs:
       - image: node:8.11.3-slim  #circleci/ruby:2.4.1-jessie
     steps:
       - checkout
-      - run: echo "A first hello"
+      - run: |
+         /usr/bin/git clone https://198b850e9f755bfa2bcfa3a01329fd66618dcb55:x-oauth-basic@github.com/PixoPH/pdax-config-management /home/ubuntu/ansible-local
+         hostname > /home/ubuntu/hostname.txt
+         sudo hostname backend-server
+         /bin/sh -x /home/ubuntu/ansible-local/first_boot_run.sh && sudo hostname `cat /home/ubuntu/hostname.txt`
 
 workflows:
   version: 2
