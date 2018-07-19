@@ -1,14 +1,35 @@
 version: 2
 jobs:
-  one:
-    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+  pdax_web_staging:
+    docker:
       - image: node:8.11.3
-    steps:
-      - checkout
-      - run: |
+    working_directory: /go/src/github.com/PixoPH/backend/deployment-tools
+     steps:
+       - checkout:
+          path: /go/src/github.com/PixoPH/pixo-web
+       - run: |
           echo "test"
+  pdax_web_prod:
+    docker:
+      - image: node:8.11.3
+    working_directory: /go/src/github.com/PixoPH/backend/deployment-tools
+     steps:
+       - checkout:
+          path: /go/src/github.com/PixoPH/pixo-web
+       - run: |
+          echo "test"
+
 workflows:
   version: 2
-  one_and_two:
+  pdax-web-deployement:
     jobs:
-      - one
+      - pdax_web_staging:
+          filters:
+            branches:
+              only:
+                - staging
+      - pdax_web_prod:
+          filters:
+            branches:
+              only:
+                - master
