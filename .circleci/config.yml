@@ -9,6 +9,6 @@ jobs:
 
 workflows:
   version: 2
-  deploy_and_test:
+  deploy-pdax-web:
     jobs:
       - deploy_pdax_web_staging
