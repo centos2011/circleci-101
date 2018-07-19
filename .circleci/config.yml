@@ -2,6 +2,7 @@ version: 2
 jobs:
   deploy_pdax_web_prod:
     docker:
+    working_directory: /home/ubuntu
       - image: node:8.11.3
     steps:
       - checkout
