@@ -10,6 +10,7 @@ jobs:
           #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
       - run: useradd ubuntu --create-home
+      - run: sudo su - ubuntu
       - run: cd /home/ubuntu
       - run: pwd
       - run: id
