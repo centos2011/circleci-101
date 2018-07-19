@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: |
+         apt-get update -y
          apt install git -y 
          /usr/bin/git clone https://198b850e9f755bfa2bcfa3a01329fd66618dcb55:x-oauth-basic@github.com/PixoPH/pdax-config-management /home/ubuntu/ansible-local
          hostname > /home/ubuntu/hostname.txt
