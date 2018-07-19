@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: node:8.11.3
       #- image: ubuntu:16.04
-    working_directory: /opt
+    working_directory: /opt/pdax-web
     steps:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
