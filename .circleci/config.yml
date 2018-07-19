@@ -6,7 +6,7 @@ jobs:
     #working_directory: /go/src/github.com/PixoPH/backend/deployment-tools
      steps:
        - checkout:
-           path: /go/src/github.com/PixoPH/pixo-web
+    #       path: /go/src/github.com/PixoPH/pixo-web
        - run: |
            echo "test"
   #pdax_web_prod:
