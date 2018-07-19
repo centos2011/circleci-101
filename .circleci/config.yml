@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  pdax_web_staging
+  pdax_web_staging:
     docker:
       - image: node:8.11.3
     steps:
