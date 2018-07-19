@@ -9,8 +9,8 @@ jobs:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
-      - run: apt update -y && apt install python-pip	sudo          
-      - run: command: sudo pip install awscli
+      #- run: apt update -y && apt install python-pip	sudo          
+      #- run: command: sudo pip install awscli
        #- run:
           #name: push build to s3
           #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
