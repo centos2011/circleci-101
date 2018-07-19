@@ -5,7 +5,7 @@ jobs:
       - image: node:8.11.3
     steps:
       - checkout
-      - run: echo "A first hello"
+      - run: echo "A first hello. Test!"
 
 workflows:
   version: 2
