@@ -12,4 +12,5 @@ workflows:
   deploy-pdax-web:
     jobs:
       - deploy_pdax_web_staging:
-          filters
+          filters:
+            branches
