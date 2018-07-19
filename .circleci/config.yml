@@ -10,6 +10,8 @@ jobs:
           #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
       - run: useradd ubuntu
+      - run: pwd
+      - run: id
       #- run:
           #name: push build to s3
           #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
