@@ -9,7 +9,7 @@ jobs:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
       - run: echo "Test!"
-      - run: apt-get update -y && apt-get install python-pip sudo
+      - run: apt-get update -y && apt-get install python-pip sudo -y
       #- run: apt update -y && apt install python-pip	sudo          
       #- run: command: sudo pip install awscli
        #- run:
