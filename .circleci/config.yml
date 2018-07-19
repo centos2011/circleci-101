@@ -1,10 +1,20 @@
 version: 2
 jobs:
-  build:
+    # The deploy job
+    deploy:
+      working_directory: /
     docker:
       - image: circleci/node:8.11.3
     steps:
-      - checkout
-      - run: |
-          sudo npm install
-          echo "test"
+      # Log the current branch
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
+      # Restore cache from build job which contains the
+      # dist folder that needs to be deployed
+      - restore_cache:
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Install aws cli
+          command:
+            sudo apt-get -y -qq install awscli
