@@ -9,7 +9,7 @@ jobs:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
       #- run: echo "Test!"
-      - run: apt-get update -y && apt-get install python-pip sudo python-dev unzip -y
+      - run: apt-get update -y && apt-get install python-pip sudo python-dev gunzip -y
       - run: sudo pip install awscli
       #- run: pip --version
       #- run: which aws
@@ -17,7 +17,7 @@ jobs:
           #name: push build to s3
           #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
       - run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip
-      - run: unzip -o -p pdax-web-prod.zip #extract
+      - run: gunzip pdax-web-prod.zip #extract
       - run: ls -l /opt/pdax-web/
        
 workflows:
