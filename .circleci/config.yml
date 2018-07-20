@@ -19,7 +19,7 @@ jobs:
       #- run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip
       #- run: gunzip pdax-web-prod.zip #extract
       - run: which gunzip
-      - run: ls -l /opt/pdax-web/
+      - run: ls -l /home/ubuntu  #/opt/pdax-web/
        
 workflows:
   version: 2
