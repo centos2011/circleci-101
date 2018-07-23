@@ -9,7 +9,7 @@ jobs:
       - checkout
           #path: /go/src/github.com/PixoPH/pixo-web
       #- run: echo "Test!"
-      - run: apt-get update -y && apt-get install python-pip sudo python-dev gzip -y
+      - run: apt-get update -y && apt-get install python-pip sudo python-dev gzip -y >/dev/null 2>&1
       - run: sudo pip install awscli >/dev/null 2>&1
       #- run: pip --version
       #- run: which aws
