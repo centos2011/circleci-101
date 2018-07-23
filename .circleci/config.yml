@@ -17,8 +17,7 @@ jobs:
           #name: push build to s3
           #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
       - run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip
-      - run: gunzip pdax-web-prod.zip #extract
-      - run: which gunzip
+      - run: unzip pdax-web-prod.zip #extract
       - run: ls -l /home/ubuntu  #/opt/pdax-web/
        
 workflows:
