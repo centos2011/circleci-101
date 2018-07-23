@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  deploy_pdax_web_prod:
+  deploy_pdax_web_staging:
     docker:
       - image: node:8.11.3
       #- image: ubuntu:16.04
@@ -16,7 +16,7 @@ jobs:
        #- run:
           #name: push build to s3
           #  command: aws deploy push --application-name pdax-web --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 
-      - run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip
+      #- run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip
       - run: unzip pdax-web-prod.zip #extract
       - run: ls -l /home/ubuntu  #/opt/pdax-web/
        
@@ -24,7 +24,7 @@ workflows:
   version: 2
   deploy-pdax-web:
     jobs:
-      - deploy_pdax_web_prod:
+      - deploy_pdax_web_staging:
           filters:
             branches:
               only:
