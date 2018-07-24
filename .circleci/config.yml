@@ -19,7 +19,7 @@ jobs:
       - run: cd /home/ubuntu/pdax-web
       - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip
       #- run: rm README.md
-      - run: unzip -qq /home/ubuntu/pdax-web/pdax-web-stagig.zip  #extract
+      - run: unzip -qq -o /home/ubuntu/pdax-web/pdax-web-stagig.zip  #extract
       - run: ls /home/ubuntu/pdax-web/  #/opt/pdax-web/
        
 workflows:
