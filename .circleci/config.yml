@@ -11,18 +11,19 @@ jobs:
       #- run: echo "Test!"
       - run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
       - run: sudo pip install awscli >/dev/null 2>&1
-      #- run: pip --version
-      #- run: which aws
-       #- run:
-          #name: push build to s3
-      #- run: aws deploy push --application-name pdax-web-staging --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 
-      #- run: cd /home/ubuntu/pdax-web
       - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip >/dev/null 2>&1
-      #- run: rm README.md
       - run: unzip -qq -o pdax-web-stagig.zip  #extract
       - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
       - run: ls -l /home/ubuntu/pdax-web/  #/opt/pdax-web/
-       
+      - run: |
+          touch /home/ubuntu/pdax-web/deploy.sh
+          echo >> "#!/bin/bash"
+          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 
+          #sed -i '2d' deploy.sh
+          sed -i "s#<deployment-group-name>#pdax-web-staging#g" deploy.sh
+          sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' deploy.sh
+          sed -i "s#<description>#PDAX Web Staging#g" deploy.sh
+      
 workflows:
   version: 2
   deploy-pdax-web:
