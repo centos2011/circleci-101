@@ -17,9 +17,9 @@ jobs:
           #name: push build to s3
       #- run: aws deploy push --application-name pdax-web-staging --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 
       - run: cd /home/ubuntu/pdax-web
-      - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig
+      - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip
       #- run: rm README.md
-      - run: unzip pdax-web-stagig.tar.zip #extract
+      - run: unzip /home/ubuntu/pdax-web/pdax-web-stagig.zip #extract
       - run: ls /home/ubuntu/pdax-web/  #/opt/pdax-web/
        
 workflows:
