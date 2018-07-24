@@ -17,7 +17,7 @@ jobs:
       - run: ls -l /home/ubuntu/pdax-web/  #/opt/pdax-web/
       - run: |
           touch /home/ubuntu/pdax-web/deploy.sh
-          echo >> "#!/bin/bash" >> /home/ubuntu/pdax-web/deploy.sh
+          echo "#!/bin/bash" >> /home/ubuntu/pdax-web/deploy.sh
           aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 
           #sed -i '2d' deploy.sh
           sed -i "s#<deployment-group-name>#pdax-web-staging#g" deploy.sh
