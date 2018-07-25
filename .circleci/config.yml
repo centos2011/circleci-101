@@ -4,10 +4,11 @@ jobs:
     docker:
       - image: node:8.11.3
       #- image: ubuntu:16.04
-    working_directory: /home/ubuntu/pdax-web #/opt/pdax-web
+    #working_directory: /home/ubuntu/pdax-web #/opt/pdax-web
+    working_directory: path: /go/src/github.com/PixoPH/pixo-web/deployment-tools
     steps:
       - checkout
-          #path: /go/src/github.com/PixoPH/pixo-web
+          path: /go/src/github.com/PixoPH/pixo-web
       - run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
       - run: sudo pip install awscli >/dev/null 2>&1 #install aws cli
       - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip >/dev/null 2>&1 #copy from S3
@@ -22,18 +23,45 @@ jobs:
           touch /home/ubuntu/pdax-web/deploy.sh
           echo "Creating codedeploy..."
           echo "#!/bin/bash" >> /home/ubuntu/pdax-web/deploy.sh
-          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/deploy.sh
+          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> deploy.sh
           sed -i '2d' deploy.sh
           sed -i "s#<deployment-group-name>#pdax-web-staging#g" deploy.sh
           sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' deploy.sh
           sed -i "s#<description>#PDAX Web Staging#g" deploy.sh
-      
+          
+  deploy_pdax_web_prod:
+      docker:
+        - image: node:8.11.3
+      working_directory: path: /go/src/github.com/PixoPH/pixo-web/deployment-tools
+      steps:
+        - checkout
+            path: /go/src/github.com/PixoPH/pixo-web
+        - run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
+        - run: sudo pip install awscli >/dev/null 2>&1 #install aws cli
+        - run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip >/dev/null 2>&1 #copy from S3
+        - run: unzip -qq -o pdax-web-stagig.zip  #extract
+        - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
+        - run: |
+            touch /home/ubuntu/pdax-web/deploy.sh
+            echo "Creating codedeploy..."
+            echo "#!/bin/bash" >> /home/ubuntu/pdax-web/deploy.sh
+            aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 >> deploy.sh
+            sed -i '2d' deploy.sh
+            sed -i "s#<deployment-group-name>#pdax-web-prod#g" deploy.sh
+            sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' deploy.sh
+            sed -i "s#<description>#PDAX Web Production#g" deploy.sh
+  
 workflows:
   version: 2
   deploy-pdax-web:
     jobs:
-      - deploy_pdax_web_staging:
+      - deploy_pdax_web_prod:
           filters:
             branches:
               only:
                 - master
+      - deploy_pdax_web_staging:
+          filters:
+            branches:
+              only:
+                - staging
