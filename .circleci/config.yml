@@ -14,6 +14,7 @@ jobs:
       - run: unzip -qq -o pdax-web-stagig.zip  #extract
       - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
       - run: wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install
+      - run: chmod +x /home/ubuntu/install
       - run: /home/ubuntu/install auto
       - run: /etc/init.d/codedeploy-agent start
       - run: |
