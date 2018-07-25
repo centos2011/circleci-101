@@ -16,9 +16,9 @@ jobs:
       - run: |
           touch /home/ubuntu/pdax-web/deploy.sh
           echo "Creating codedeploy..."
-          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/deploy.sh
-          sed -i '1d' deploy.sh
           echo "#!/bin/bash" >> /home/ubuntu/pdax-web/deploy.sh
+          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/deploy.sh
+          sed -i '2d' deploy.sh
           sed -i "s#<deployment-group-name>#pdax-web-staging#g" deploy.sh
           sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' deploy.sh
           sed -i "s#<description>#PDAX Web Staging#g" deploy.sh
