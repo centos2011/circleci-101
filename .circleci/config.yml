@@ -5,7 +5,7 @@ jobs:
       - image: node:8.11.3
       #- image: ubuntu:16.04
     #working_directory: /home/ubuntu/pdax-web #/opt/pdax-web
-    working_directory: path: /home/ubuntu/pdax-web/scripts/deploy
+    working_directory: path: /home/ubuntu/pdax-web/scripts
     steps:
       - checkout
           #path: /PixoPH/pixo-web/tree/master/scripts/deploy
