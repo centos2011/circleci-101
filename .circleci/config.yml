@@ -2,7 +2,6 @@ version: 2
 jobs:
   deploy_pdax_web_staging:
     docker:
-      #- image: node:8.11.3
       - image: ubuntu:16.04
     working_directory: /home/ubuntu/pdax-web
     steps:
@@ -22,15 +21,17 @@ jobs:
       - run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
       - run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
       - run: |
-          touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          touch 
+          
           echo "Creating codedeploy..."
-          echo "#!/bin/bash" >> /home/ubuntu/pdax-web/script/deploy/deploy.sh
-          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/script/deploy/deploy.sh
-          sed -i '2d' /home/ubuntu/pdax-web/script/deploy/deploy.sh
-          sed -i "s#<deployment-group-name>#pdax-web-staging#g" /home/ubuntu/pdax-web/script/deploy/deploy.sh
-          sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' /home/ubuntu/pdax-web/script/deploy/deploy.sh
-          sed -i "s#<description>#PDAX Web Staging#g" /home/ubuntu/pdax-web/script/deploy/deploy.sh
+          echo "#!/bin/bash" >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          sed -i '2d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          sed -i "s#<deployment-group-name>#pdax-web-staging#g" /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          sed -i "s#<description>#PDAX Web Staging#g" /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           cat /home/ubuntu/pdax-web/script/deploy/deploy.sh
+          /bin/sh /home/ubuntu/pdax-web/script/deploy/deploy.sh
           
   #deploy_pdax_web_prod:
   #    docker:
