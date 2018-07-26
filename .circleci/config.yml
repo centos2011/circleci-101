@@ -14,10 +14,10 @@ jobs:
       - run: unzip -qq -o pdax-web-stagig.zip -d /home/ubuntu/pdax-web #extract
       - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
       - run: apt-get install -y curl
-      - run: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-      - run: apt-get install -y nodejs
-      - run: apt-get install -y awscli
-      - run: npm -v
+      #- run: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      #- run: apt-get install -y nodejs
+      #- run: apt-get install -y awscli
+      #- run: npm -v
       
       - run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
       #- run: wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install -O /home/ubuntu/install
