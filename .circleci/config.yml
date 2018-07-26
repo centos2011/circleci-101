@@ -28,7 +28,7 @@ jobs:
           sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           sed -i 's#<description>#"PDAX Web Staging"#g' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           sed -i '2,3d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          ed -i '2d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          sed -i '2d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           #/bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           
