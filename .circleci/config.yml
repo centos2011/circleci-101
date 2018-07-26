@@ -17,7 +17,7 @@ jobs:
       - run: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       - run: apt-get install -y nodejs
       - run: apt-get install -y awscli
-      - run: apt-get install -y npm
+      - run: npm -v
       
       - run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
       #- run: wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install -O /home/ubuntu/install
