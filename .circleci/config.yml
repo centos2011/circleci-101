@@ -18,8 +18,8 @@ jobs:
       - run: wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install -O /home/ubuntu/install
       - run: chmod +x /home/ubuntu/install
       - run: /home/ubuntu/install auto
-      - run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
-      - run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
+      #- run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
+      #- run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
       - run: |
           touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh   
           echo "Creating codedeploy..."
@@ -30,7 +30,7 @@ jobs:
           sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           sed -i "s#<description>#PDAX Web Staging#g" /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          /bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          #/bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           
   #deploy_pdax_web_prod:
   #    docker:
