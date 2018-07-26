@@ -4,7 +4,7 @@ jobs:
     docker:
       #- image: node:8.11.3
       - image: ubuntu:16.04
-    working_directory: /home/ubuntu/pdax-web/scripts/deploy
+    working_directory: /home/ubuntu/pdax-web
     steps:
       - checkout:
           path: /home/ubuntu/pdax-web
