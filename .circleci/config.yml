@@ -59,7 +59,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - staging
     #  - deploy_pdax_web_prod:
     #      filters:
     #        branches:
