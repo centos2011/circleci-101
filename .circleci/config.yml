@@ -5,10 +5,10 @@ jobs:
       - image: node:8.11.3
       #- image: ubuntu:16.04
     #working_directory: /home/ubuntu/pdax-web #/opt/pdax-web
-    working_directory: path: /go/src/github.com/PixoPH/pixo-web/deployment-tools
+    working_directory: path: /home/ubuntu/pdax-web/scripts/deploy
     steps:
       - checkout
-          path: /go/src/github.com/PixoPH/pixo-web
+          path: /PixoPH/pixo-web/tree/master/scripts/deploy
       - run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
       - run: sudo pip install awscli >/dev/null 2>&1 #install aws cli
       - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip >/dev/null 2>&1 #copy from S3
@@ -55,13 +55,13 @@ workflows:
   version: 2
   deploy-pdax-web:
     jobs:
-      - deploy_pdax_web_prod:
-          filters:
-            branches:
-              only:
-                - master
+    #  - deploy_pdax_web_prod:
+    #      filters:
+    #        branches:
+    #          only:
+    #            - master
       - deploy_pdax_web_staging:
-          filters:
-            branches:
-              only:
-                - staging
+    #      filters:
+    #        branches:
+    #          only:
+    #            - staging
