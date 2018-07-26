@@ -27,6 +27,7 @@ jobs:
           sed -i "s#<deployment-group-name>#pdax-web-staging#g" deploy.sh
           sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' deploy.sh
           sed -i "s#<description>#PDAX Web Staging#g" deploy.sh
+       - run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
           
   #deploy_pdax_web_prod:
   #    docker:
