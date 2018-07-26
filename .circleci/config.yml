@@ -14,6 +14,7 @@ jobs:
       - run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip >/dev/null 2>&1 #copy from S3
       - run: unzip -qq -o pdax-web-stagig.zip  #extract
       - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
+      - run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh 
       #- run: wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install -O /home/ubuntu/install
       #- run: chmod +x /home/ubuntu/install
       #- run: ls -l /home/ubuntu
