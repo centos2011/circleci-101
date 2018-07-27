@@ -54,7 +54,7 @@ jobs:
       #- run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
       - run: |
           touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          echo '#!/bin/bash' > /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          #echo '#!/bin/bash' > /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           #echo "Creating codedeploy..."
           aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
@@ -64,7 +64,7 @@ jobs:
           #sed -i '2,3d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           sed -i '2d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          #/bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+          /bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
   
 workflows:
   version: 2
