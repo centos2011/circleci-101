@@ -21,6 +21,7 @@ jobs:
       #- run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
       #- run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
       - run: |
+          mv /home/ubuntu/pixo-web /home/ubuntu/pdax-web
           touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh   
           #echo "Creating codedeploy..."
           aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
