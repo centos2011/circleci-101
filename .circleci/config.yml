@@ -3,7 +3,7 @@ jobs:
   deploy_pdax_web_staging:
     docker:
       - image: ubuntu:16.04
-    working_directory: /home/ubuntu/pdax-web/
+    working_directory: /home/ubuntu
     steps:
       - checkout:
           path: /PixoPH/pixo-web
@@ -32,18 +32,18 @@ jobs:
           cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           #/bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           
-  deploy_pdax_web_prod:
-    docker:
-      - image: ubuntu:16.04
-    working_directory: /home/ubuntu/pdax-web
-    steps:
-      - checkout:
-          path: /home/ubuntu/pdax-web/scripts/deploy
-      - run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
-      - run: sudo pip install awscli >/dev/null 2>&1 #install aws cli
-      - run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip >/dev/null 2>&1 #copy from S3
-      - run: unzip -qq -o pdax-web-prod.zip -d /home/ubuntu/pdax-web #extract
-      - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
+  #deploy_pdax_web_prod:
+  #  docker:
+  #    - image: ubuntu:16.04
+  #  working_directory: /home/ubuntu/pdax-web
+  #  steps:
+  #    - checkout:
+  #        path: /home/ubuntu/pdax-web/scripts/deploy
+  #    - run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
+  #    - run: sudo pip install awscli >/dev/null 2>&1 #install aws cli
+  #    - run: aws s3 cp s3://pdax-circleci/pdax-web-prod pdax-web-prod.zip >/dev/null 2>&1 #copy from S3
+  #    - run: unzip -qq -o pdax-web-prod.zip -d /home/ubuntu/pdax-web #extract
+  #    - run: rm -rf /home/ubuntu/pdax-web/pdax-web-staging.zip
       #- run: apt-get install -y curl
       #- run: apt-get install -y wget
       #- run: apt-get install -y ruby
@@ -52,18 +52,18 @@ jobs:
       #- run: /home/ubuntu/install auto
       #- run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
       #- run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
-      - run: |
-          touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          #echo '#!/bin/bash' > /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          #echo "Creating codedeploy..."
-          aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          sed -i "s#<deployment-group-name>#pdax-web-prod-v2#g" /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          sed -i 's#<description>#"PDAX Web Production"#g' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          #sed -i '2,3d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          sed -i '2d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
-          cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #    - run: |
+  #        touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        #echo '#!/bin/bash' > /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        #echo "Creating codedeploy..."
+  #        aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-prod --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        sed -i "s#<deployment-group-name>#pdax-web-prod-v2#g" /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        sed -i 's/--deployment-config-name <deployment-config-name>/--region=ap-southeast-1 --output text/' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        sed -i 's#<description>#"PDAX Web Production"#g' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        #sed -i '2,3d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        sed -i '2d' /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
+  #        cat /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
           #/bin/sh /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
   
 workflows:
