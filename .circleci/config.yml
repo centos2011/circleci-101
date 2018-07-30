@@ -3,10 +3,10 @@ jobs:
   deploy_pdax_web_staging:
     docker:
       - image: ubuntu:16.04
-    working_directory: /home/ubuntu
+    working_directory: /home/ubuntu/pdax-web/scripts/deploy
     steps:
       - checkout:
-          path: /PixoPH/pixo-web
+          path: /home/ubuntu/pdax-web
       #- run: apt-get update -y >/dev/null 2>&1 && apt-get install python-pip sudo python-dev gzip zip -y >/dev/null 2>&1
       #- run: sudo pip install awscli >/dev/null 2>&1 #install aws cli
       #- run: aws s3 cp s3://pdax-circleci/pdax-web-staging pdax-web-stagig.zip >/dev/null 2>&1 #copy from S3
@@ -21,7 +21,6 @@ jobs:
       #- run: /home/ubuntu/pdax-web/scripts/deploy/install_dependencies.sh
       #- run: /home/ubuntu/pdax-web/scripts/deploy/after_install.sh 
       - run: |
-          mv /home/ubuntu/pixo-web /home/ubuntu/pdax-web
           touch /home/ubuntu/pdax-web/scripts/deploy/deploy.sh   
           #echo "Creating codedeploy..."
           aws deploy push --application-name pdax-web-prod --s3-location s3://pdax-circleci/pdax-web-staging --ignore-hidden-files --region=ap-southeast-1 >> /home/ubuntu/pdax-web/scripts/deploy/deploy.sh
