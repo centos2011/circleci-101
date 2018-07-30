@@ -71,10 +71,10 @@ workflows:
   deploy-pdax-web:
     jobs:
       - deploy_pdax_web_staging:
-#          filters:
-#            branches:
-#              only:
-#                - staging
+          filters:
+            branches:
+              only:
+                - master
 #      - deploy_pdax_web_prod:
 #          filters:
 #            branches:
